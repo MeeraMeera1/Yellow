@@ -1,1 +1,39 @@
 /* TODO Add site wide styles */
+* {
+     box-sizing:border-box;
+ }
+ html,body {
+     font-family: 'Helvetica Neue', sans-serif;
+ }
+
+ a, a:visited {
+     text-decoration: none;
+ }
+
+ .active {
+     font-weight: bold;
+ }
+
+ #palette-wrapper {
+     display: flex;
+     justify-content: center;
+ }
+
+ .palette {
+     width: 60vw;
+     display: flex;
+     flex-wrap: wrap;
+ }
+
+ .color-square {
+     display: flex;
+     justify-content: center;
+     align-items: flex-end;
+ }
+
+ .color-square span {
+     display: block;
+     padding: 5px;
+     background: rgba(0,0,0,0.5);
+     color: white;
+ } 

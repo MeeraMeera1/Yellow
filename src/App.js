@@ -1,18 +1,62 @@
-import ColorSquare from "./components/ColorSquare/index";
-const colors = ["255,0,255", "0,0,76", "0,100,255", "8,0,7", "165,187,255"];
+import Palette from "./components/Palette";
+import { NavLink, Route, Switch, useParams } from "react-router-dom";
 
+const palettes = {
+  cool: {
+    title: "A Cool Palette",
+    colors: ["131,59,36", "120,104,44", "53,68,65", "123,129,118", "96,104,99"],
+  },
+  dalmond: {
+    title: "Essence of Dalmond",
+    colors: ["255,235,205", "179,169,144", "255,252,243", "255,248,230"],
+  },
+  joe: {
+    title: "Joe's Room during EOD",
+    colors: ["0,0,0", "70,70,125"],
+  },
+};
+
+const PaletteContainer = () => {
+  const paletteCodeInURL = useParams().paletteCode;
+  const paletteToUse = palettes[paletteCodeInURL];
+  if (!paletteToUse) {
+    return (
+      <h4>
+        Uhhhhhhhhhh ... how'd you get here? I don't know about{" "}
+        {paletteCodeInURL}
+      </h4>
+    );
+  }
+  return (
+    <div className="palette-wrapper">
+      <h1>{paletteToUse.title}</h1>
+      <Palette colors={paletteToUse.colors} dimensionPerSquare={150} />
+    </div>
+  );
+};
 
 function App() {
-  const colorComponents = colors.map((colorString) => {
-    return <ColorSquare color={colorString} dimensions={30} />;
-  });
-
   return (
-    <div>
-      <ColorSquare color={"0,0,255"} dimensions={200} />
-      <ColorSquare color={"255,0,0"} dimensions={50} />
-      <ColorSquare color={"0,255,0"} dimensions={400} />
-      {colorComponents}
+    <div id="top-level-app">
+      <ul>
+        <li>
+          <NavLink to="/palettes/cool">A Cool Palette</NavLink>
+        </li>
+        <li>
+          <NavLink to="/palettes/dalmond">Essence of Dalmond</NavLink>
+        </li>
+        <li>
+          <NavLink to="/palettes/joe">Joe's Room During EOD</NavLink>
+        </li>
+      </ul>
+      <Switch>
+        <Route path="/palettes/:paletteCode">
+          <PaletteContainer />
+        </Route>
+        <Route>
+          <h4>Hey you! Select a fancy palette you wanna see!</h4>
+        </Route>
+      </Switch>
     </div>
   );
 }
