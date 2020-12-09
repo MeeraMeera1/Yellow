@@ -1,12 +1,12 @@
 //react component is a function that outputs something visual
 
-const ColorSquare = () => {
+const ColorSquare = ({ color, dimensions }) => {
   return (
     <div
       style={{
-        width: "200px",
-        height: "200px",
-        background: "rgb(0,0,255)",
+        width: `${dimensions}px`,
+        height: `${dimensions}px`,
+        background: `rgb(${color})`,
       }}
     ></div>
   );
